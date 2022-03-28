@@ -1,11 +1,23 @@
 ---
 # main playbook for the mdatp_onboard role
 
-- name: check distribution for compatibility
-  include_tasks: compat_chk.yml
-
-- name: onboard to mdatp
-  include_tasks: mdatp_install.yml
-
-- name: mdatp onboarding status
+- name: check current onboarding status
   include_tasks: mdatp_status.yml
+
+- name: onboarding Microsoft Defender for Endpoint
+  include_tasks: mdatp_onboard.yml
+  when:
+    - (mma_state.state is defined and mma_state.state == "running")
+    - (current_onboard_status is defined and current_onboard_status.rc == 1)
+
+- name: set onboarding status vars
+  set_fact:
+    pre_task_status: "{{ 'Already Onboarded' if (current_onboard_status is defined and current_onboard_status.rc == 0) else 'Not Onboarded' }}"
+    post_task_status: "{{ 'Successfully Onboarded' if (post_onboard_status is defined and post_onboard_status.rc == 0) else 'Not Applicable' }}"
+
+- name: onboarding results
+  debug:
+    msg:
+      - " hostname        - {{ ansible_hostname }} "
+      - " status (before) - {{ pre_task_status }} "
+      - " status (after)  - {{ post_task_status }} "
