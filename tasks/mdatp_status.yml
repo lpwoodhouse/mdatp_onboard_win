@@ -1,0 +1,36 @@
+---
+# Tasks to check the MDATP status of a Windows machine
+
+# Ensures a stable winrm connection to prevent ConnectTimeout
+- name: wait for connection
+  wait_for_connection:
+    timeout: 20
+
+# Get the service status of Microsoft Monitoring Agent
+- name: get MMA service status
+  block:
+
+    - name: MMA service check
+      win_service:
+        name: HealthService
+        state: started
+      register: mma_state
+      ignore_errors: true
+
+  #  - name: Microsoft Monitoring Agent (MMA) service status
+  #   debug:
+  #      msg:
+  #        - " Service name    - {{ mma_state.name }} "
+  #        - " Display name    - {{ mma_state.display_name }} "
+  #        - " Start mode      - {{ mma_state.start_mode }} "
+  #        - " Service status  - {{ mma_state.state }} "
+  #    when: mma_state is defined
+  #    ignore_errors: true
+  # end of MMA service status block
+
+# Checks the Windows event log for event ID 20 in the Application logs
+- name: check event log for onboarding events
+  win_shell:
+    Get-WinEvent -FilterHashtable @{logname='application'; id=20}
+  failed_when: (current_onboard_status.rc not in [0,1])
+  register: current_onboard_status
