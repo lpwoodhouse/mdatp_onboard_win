@@ -1,0 +1,46 @@
+---
+# Tasks to onboard a Windows machine to Microsoft Defender for Endpoint
+
+# Ensures a stable winrm connection to prevent ConnectTimeout
+- name: wait for connection
+  wait_for_connection:
+    timeout: 20
+
+- name: create temp directory
+  win_file:
+    path: C:\Temp
+    state: directory
+
+- name: copy archived onboarding package to host
+  win_copy:
+    src: "{{ zip_path }}"
+    dest: C:\Temp
+
+- name: unzip onboarding package archive
+  win_unzip:
+    src: C:\Temp\WindowsDefenderATPOnboardingPackage.zip
+    dest: C:\Temp\WindowsDefenderATPOnboardingPackage
+    delete_archive: yes
+
+# Ensures a stable winrm connection to prevent ConnectTimeout
+- name: wait for connection
+  wait_for_connection:
+    timeout: 20
+
+- name: execute onboarding script
+  win_command: .\WindowsDefenderATPOnboardingScript.cmd
+  args:
+    chdir: C:\Temp\WindowsDefenderATPOnboardingPackage
+
+# Ensures a stable winrm connection to prevent ConnectTimeout
+- name: wait for connection
+  wait_for_connection:
+    timeout: 20
+
+# Checks the Windows event log for event ID 20 in the Application logs
+- name: check event log for onboarding events
+  win_shell:
+    Get-WinEvent -FilterHashtable @{logname='application'; id=20}
+  failed_when: (post_onboard_status.rc not in [0,1])
+  register: post_onboard_status
+  ignore_errors: true
