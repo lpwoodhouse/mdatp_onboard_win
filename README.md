@@ -8,7 +8,6 @@ None
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see ```defaults/main.yml```)
 ```shell
 # Important to provide a path to your onboarding package zip file which will be copied to the hosts during role execution.
 
