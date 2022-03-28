@@ -1,6 +1,6 @@
-# Ansible Role: mdatp_onboard
+# Ansible Role: mdatp_onboard_win
 
-Onboards a Linux client distro (Redhat, Ubuntu and Suse families) to Microsoft Defender Advanced Threat Detection
+Onboards a Windows client to Microsoft Defender Advanced Threat Detection
 
 ## Requirements
 
@@ -10,9 +10,16 @@ None
 
 Available variables are listed below, along with default values (see ```defaults/main.yml```)
 ```shell
-# Important to provide a path to your onboard json file which will be copied to the hosts during role execution.
-# sample_mdatp_onboard.json is provided as a sample only and will not work.
-json_path: "files/sample_mdatp_onboard.json"
+# Important to provide a path to your onboarding package zip file which will be copied to the hosts during role execution.
+
+zip_path: "files/WindowsDefenderATPOnboardingPackage.zip"
+
+# Example of package contents
+    - WindowsDefenderATPOnboardingScript
+    - OptionalParamsPolicy
+        - AtpConfiguration.admx
+        - en-US
+            - AtpConfiguration.adml
 ```
 ## Dependencies
 
@@ -22,9 +29,9 @@ None
 ```yaml
     - hosts: all
       vars:
-        - json_path: "files/mdatp_onboard.json"
+        - zip_path: "files/WindowsDefenderATPOnboardingPackage.zip"
       roles:
-        - mdatp_onboard
+        - mdatp_onboard_win
 ```
 
 ## License
