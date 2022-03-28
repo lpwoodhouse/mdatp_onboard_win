@@ -1,5 +1,5 @@
 ---
-# main playbook for the mdatp_onboard role
+# main playbook for the mdatp_onboard_win role
 
 - name: check current onboarding status
   include_tasks: mdatp_status.yml
