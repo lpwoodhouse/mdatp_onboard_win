@@ -4,7 +4,7 @@ Onboards a Windows client to Microsoft Defender Advanced Threat Detection
 
 ## Requirements
 
-None
+community.windows
 
 ## Role Variables
 
