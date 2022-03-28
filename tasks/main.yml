@@ -1,0 +1,11 @@
+---
+# main playbook for the mdatp_onboard role
+
+- name: check distribution for compatibility
+  include_tasks: compat_chk.yml
+
+- name: onboard to mdatp
+  include_tasks: mdatp_install.yml
+
+- name: mdatp onboarding status
+  include_tasks: mdatp_status.yml

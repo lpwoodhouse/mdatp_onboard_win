@@ -1,0 +1,5 @@
+---
+# MDATP Variables
+mdatp_path: "/etc/opt/microsoft/mdatp"
+gpg_key_url: "https://packages.microsoft.com/keys/microsoft.asc"
+base_url: "https://packages.microsoft.com"

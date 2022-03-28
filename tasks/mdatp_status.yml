@@ -1,0 +1,55 @@
+---
+#
+- name: get MDATP health
+  shell: mdatp health | awk '{print $3}' | sed 's/"//g'
+  register: mdatp_health
+  ignore_errors: true
+  
+- name: MDATP Status
+  debug:
+    msg:      
+      - " Healthy                        - {{ mdatp_health.stdout_lines[0] }} "
+      - " Licensed                       - {{ mdatp_health.stdout_lines[2] }} "
+      - " Org ID                         - {{ mdatp_health.stdout_lines[5] }} "
+      - " App Version                    - {{ mdatp_health.stdout_lines[4] }} "
+      - " Cloud Enabled                  - {{ mdatp_health.stdout_lines[10] }} "
+      - " Passive Mode Enabled           - {{ mdatp_health.stdout_lines[13] }} "
+      - " Real Time Protection Enabled   - {{ mdatp_health.stdout_lines[14] }} "
+      - " Auto Definition Update Enabled - {{ mdatp_health.stdout_lines[19] }} "
+      - " Definitions Updated            - {{ mdatp_health.stdout_lines[20] }} "
+      - " Definitions Version            - {{ mdatp_health.stdout_lines[22] }} "
+      - " Definitions Status             - {{ mdatp_health.stdout_lines[23] }} "
+  ignore_errors: true
+
+## Typical MDATP Health standard output ##
+#
+# Line 0: healthy                                     : true
+# Line 2: licensed                                    : true
+# Line 3: engine_version                              : "3.0"
+# Line 4: app_version                                 : "101.34.27"
+# Line 5: org_id                                      : "a2c7cba4-0f3b-438e-8a5e-debcbf70d6ef"
+# Line 6: log_level                                   : "info"
+# Line 7: machine_guid                                : "ab3f0642-7d5a-4853-7e50-a8397940dbaf"
+# Line 8: release_ring                                : "Production"
+# Line 9: product_expiration                          : Mar 18, 2022 at 09:17:40 AM
+# Line 10: cloud_enabled                               : true
+# Line 11: cloud_automatic_sample_submission_consent   : "safe"
+# Line 12: cloud_diagnostic_enabled                    : false
+# Line 13: passive_mode_enabled                        : false
+# Line 14: real_time_protection_enabled                : true
+# Line 15: real_time_protection_available              : true
+# Line 16: real_time_protection_subsystem              : "fanotify"
+# Line 17: supplementary_events_subsystem              : unavailable
+# Line 18: tamper_protection                           : "disabled"
+# Line 19: automatic_definition_update_enabled         : true
+# Line 20: definitions_updated                         : Aug 09, 2021 at 09:46:31 AM
+# Line 21: definitions_updated_minutes_ago             : 9
+# Line 22: definitions_version                         : "85386"
+# Line 23: definitions_status                          : "up_to_date"
+# Line 24: edr_early_preview_enabled                   : "disabled"
+# Line 25: edr_device_tags                             : []
+# Line 26: edr_group_ids                               : ""
+# Line 27: edr_configuration_version                   : "30.199999.6225412.5582639-7dee61a0f271397fa2aa63f684b5e17f225761a8"
+# Line 28: edr_machine_id                              : "49a4b017288c4669b746fe044e587635a89a16bb"
+# Line 29: conflicting_applications                    : []
+# Line 30: network_protection_status                   : "stopped"

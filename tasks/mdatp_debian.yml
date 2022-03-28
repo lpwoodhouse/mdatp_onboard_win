@@ -1,0 +1,14 @@
+---
+# Task to add the gpg key for the Microsoft repository to the host
+- name: add Microsoft gpg key
+  apt_key:
+    url: "{{ gpg_key_url }}"
+    state: present
+
+# Task to add the Microsoft apt repository for MDATP
+- name: add repository
+  apt_repository:
+    repo: "deb [arch=arm64,armhf,amd64] {{ base_url }}/{{ ansible_distribution|lower }}/{{ ansible_distribution_version }}/prod {{ ansible_distribution_release }} main"
+    filename: microsoft-prod
+    update_cache: yes
+    state: present

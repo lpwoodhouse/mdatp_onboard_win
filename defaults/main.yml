@@ -1,0 +1,3 @@
+---
+# default variables for mdatp_onboard
+json_path: "files/sample_mdatp_onboard.json"

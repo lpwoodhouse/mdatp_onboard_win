@@ -1,0 +1,46 @@
+---
+# Tasks for MDATP onboarding for Linux machines
+
+# Load variables required for configuration of the environment
+- name: load variables for mdatp configuration
+  include_vars: ../vars/mdatp_vars.yml
+
+# Creates a directory for MDATP
+- name: create mdatp directory
+  file:
+    path: "{{ mdatp_path }}"
+    recurse: true
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+# Copy MDATP onboarding json to host
+- name: copy mdatp_onboard.json
+  copy:
+    src: "{{ json_path }}"
+    dest: "{{ mdatp_path }}/mdatp_onboard.json"
+
+# Configure distibutions for MDATP onboarding
+- name: configure for mdatp (RedHat family)
+  include_tasks: mdatp_redhat.yml
+  when: ansible_os_family == "RedHat"
+
+- name: configure for mdatap (Debian family)
+  include_tasks: mdatp_debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: configure for (Suse family)
+  include_tasks: mdatp_suse.yml
+  when: ansible_os_family == "Suse"
+
+# Install MDATP package
+- name: install mdatp package
+  package:
+    name: mdatp
+    state: present
+
+# Check if MDATP service is present
+- name: mdatp service status check
+  shell: service mdatp status | awk '(NR==3){print $2, $3}'
+  register: mdatp_service

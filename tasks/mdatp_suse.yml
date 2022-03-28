@@ -1,0 +1,13 @@
+---
+# Task to download the microsoft packages .rpm
+- name: download the microsoft packages .rpm
+  get_url:
+    url: "{{ base_url }}/{{ ansible_distribution|lower() }}/{{ ansible_distribution_major_version }}/prod/packages-microsoft-prod.rpm"
+    dest: /tmp/packages-microsoft-prod.rpm
+
+# Task to add the Microsoft zypper repository for MDATP
+- name: add repository
+  zypper:
+    name: /tmp/packages-microsoft-prod.rpm
+    state: present
+    disable_gpg_check: yes

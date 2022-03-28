@@ -1,0 +1,39 @@
+---
+# Task to add the gpg key for the Microsoft repository to the host
+- name: add Microsoft gpg key
+  rpm_key:
+    key: "{{ gpg_key_url }}"
+    state: present
+
+# Tasks to remove existing repo from a previous or failed onboarding attempt
+- name: remove any existing Microsoft yum repo for MDATP
+  block:
+  
+    - yum_repository:
+        name: microsoft-prod
+        state: absent
+      ignore_errors: True
+
+    - command: yum clean metadata
+      args:
+        warn: no
+
+# Task to add the Microsoft yum repository for MDATP
+- name: add repository
+  yum_repository:
+    name: packages-microsoft-prod
+    description: Microsoft Defender for Endpoint
+    file: microsoft-prod
+    baseurl: "{{ base_url }}/rhel/{{ ansible_distribution_major_version }}/prod/"
+    gpgcheck: yes
+    enabled: Yes
+
+# Disable 'epel' repo on RHEL 6
+- command: yum-config-manager --disable epel
+  ignore_errors: true
+  when: ansible_distribution_major_version == "6"
+
+- name: update yum cache
+  command: yum makecache
+  args:
+    warn: false

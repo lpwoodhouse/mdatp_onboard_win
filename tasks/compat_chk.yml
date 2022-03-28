@@ -1,0 +1,29 @@
+--
+## Tasks to check the linux host for compatibility
+
+# Check if MDATP service is already installed and running
+- name: mdatp service status check
+  shell: service mdatp status | awk '(NR==3){print $2, $3}'
+  register: mdatp_present
+
+- name: mdatp install not required
+  block:
+
+    - debug:
+        msg: MDATP is installed and running
+    - meta: end_host
+
+  when: '"running" in mdatp_present.stdout'
+
+# Check if MDATP is compatible with distribution
+- name: load variables for compatiblity check
+  include_vars: ../vars/compatible_vars.yml
+        
+- name: mdatp not supported
+  block:
+
+    - debug:
+        msg: "{{ ansible_distribtuion }} {{ ansible_distribution_version }} is not supported by MDATP"
+    - meta: end_host
+
+  when: current_dist in not_compatible
