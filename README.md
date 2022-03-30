@@ -13,12 +13,12 @@ community.windows
 
 zip_path: "files/WindowsDefenderATPOnboardingPackage.zip"
 
-# Example of package contents
-    - WindowsDefenderATPOnboardingScript
-    - OptionalParamsPolicy
-        - AtpConfiguration.admx
-        - en-US
-            - AtpConfiguration.adml
+# Example of zip contents
+#   - WindowsDefenderATPOnboardingScript
+#   - <dir> OptionalParamsPolicy
+#       - AtpConfiguration.admx
+#       - <dir> en-US
+#           - AtpConfiguration.adml
 ```
 ## Dependencies
 
