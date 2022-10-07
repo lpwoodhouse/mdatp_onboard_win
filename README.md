@@ -1,4 +1,4 @@
-# Ansible Role: mdatp_onboard_win
+# Ansible Playbook: mdatp_onboard_win
 ![GitHub last commit](https://img.shields.io/github/last-commit/lpwoodhouse/mdatp_onboard_win)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/lpwoodhouse/mdatp_onboard_win)
 ![GitHub top language](https://img.shields.io/github/languages/top/lpwoodhouse/mdatp_onboard_win)
@@ -44,4 +44,4 @@ None
 
 ## Author Information
 
-This role was created in 2022 by [Lee Woodhouse](https://www.leewoodhouse.com/)
+This playbook was created in 2022 by [Lee Woodhouse](https://www.leewoodhouse.com/)
