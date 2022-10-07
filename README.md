@@ -1,7 +1,7 @@
 # Ansible Role: mdatp_onboard_win
-![GitHub last commit](https://img.shields.io/github/last-commit/lpwoodhouse/playbook_mdatp_onboard_win)
-![GitHub repo file count](https://img.shields.io/github/directory-file-count/lpwoodhouse/playbook_mdatp_onboard_win)
-![GitHub top language](https://img.shields.io/github/languages/top/lpwoodhouse/playbook_mdatp_onboard_win)
+![GitHub last commit](https://img.shields.io/github/last-commit/lpwoodhouse/mdatp_onboard_win)
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/lpwoodhouse/mdatp_onboard_win)
+![GitHub top language](https://img.shields.io/github/languages/top/lpwoodhouse/mdatp_onboard_win)
 
 ## Purpose
 
@@ -40,7 +40,7 @@ None
 
 ## License
 
-[![GitHub](https://img.shields.io/github/license/lpwoodhouse/playbook_mdatp_onboard_win)](LICENSE)
+[![GitHub](https://img.shields.io/github/license/lpwoodhouse/mdatp_onboard_win)](LICENSE)
 
 ## Author Information
 
