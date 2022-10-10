@@ -1,5 +1,5 @@
 # Onboard Microsoft Defender Advanced Threat Protection (MDATP) (Windows Hosts)
-![Windows](https://img.shields.io/badge/Microsoft%20Windows-232F3E?style=flat&logo=windows&logoColor=3a77b3)
+![Windows](https://img.shields.io/badge/Microsoft%20Windows-white?style=flat&logo=windows&logoColor=3a77b3)
 [![playbook](https://img.shields.io/badge/Ansible-Playbook-blue)](site.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lpwoodhouse/mdatp_onboard_win)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/lpwoodhouse/mdatp_onboard_win)
