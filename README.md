@@ -1,11 +1,12 @@
-# Ansible Playbook: mdatp_onboard_win
+# Onboard Microsoft Defender Advanced Threat Protection (MDATP) (Windows Hosts)
+[![playbook](https://img.shields.io/badge/Ansible-Playbook-blue)](site.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lpwoodhouse/mdatp_onboard_win)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/lpwoodhouse/mdatp_onboard_win)
 ![GitHub top language](https://img.shields.io/github/languages/top/lpwoodhouse/mdatp_onboard_win)
-
+[![GitHub](https://img.shields.io/github/license/lpwoodhouse/mdatp_onboard_win)](LICENSE)
 ## Purpose
 
-Onboards a Windows client to Microsoft Defender Advanced Threat Detection
+Onboards a Windows client to Microsoft Defender Advanced Threat Detection.
 
 ## Requirements
 
@@ -37,10 +38,6 @@ None
       roles:
         - mdatp_onboard_win
 ```
-
-## License
-
-[![GitHub](https://img.shields.io/github/license/lpwoodhouse/mdatp_onboard_win)](LICENSE)
 
 ## Author Information
 
